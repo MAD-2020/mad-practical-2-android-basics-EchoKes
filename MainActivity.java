@@ -28,21 +28,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         B1 = findViewById(R.id.b1);
         B2 = findViewById(R.id.b2);
         B3 = findViewById(R.id.b3);
         Score = findViewById(R.id.score);
 
-        Log.v(TAG, "Finished Pre-Initialisation!");
+        Log.d("#d", "Finished Pre-Initialisation!");
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("#d", "started");
         bList = new Button[]{B1, B2, B3};
         lrm = new String[]{"Button Left Clicked!","Button Middle Clicked!","Button Right Clicked!"};
         setNewMole();
-        Log.v(TAG, "Starting GUI!");
+        Log.d("#d", "Starting GUI!");
         gameOn();
     }
 
@@ -57,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.v(TAG, lrm[logB]);
                     if (bList[finalB].getText() == "*") {
                         Score.setText("" + (Count += 1));
-                        Log.v(TAG, "Hit, score added!");
+                        Log.d("#d", "Hit, score added!");
                     } else {
                         Score.setText("" + (Count -=1));
-                        Log.v(TAG, "Missed, score deducted!");
+                        Log.d("#d", "Missed, score deducted!");
                     }
                     setNewMole();
                 }
@@ -80,6 +83,23 @@ public class MainActivity extends AppCompatActivity {
                 bList[i].setText("O");
             }
         }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("#d", "stopped");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("#d", "paused");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("#d", "destroyed");
     }
 }
 
